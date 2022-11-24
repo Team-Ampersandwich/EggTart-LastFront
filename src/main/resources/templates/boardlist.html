@@ -33,7 +33,7 @@
     <meta property="og:image:height" content="630" />
 
     <!-- Favicon -->
-    <link rel="icon" href="./images/EggTart_icon_invers.png" />
+    <link rel="icon" href="images/EggTart_icon_invers.png" />
 
 </head>
 
@@ -88,19 +88,31 @@
     .bt_wrap a:first-child {
         margin-left: 0;
     }
+
     .bt_wrap a.on {
+        margin-top: 2%;
         background-color: #000;
         color: #fff;
-        margin-left: 4%;
-        margin-top: 2%;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
+        position: relative;
     }
     .bt_wrap a.on:active {
         background-color: #fff;
         color: #000;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
+        position: relative;
     }
     .bt_wrap a:active {
         background-color: #000;
         color: #fff;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
+        position: relative;
     }
 
     .board_list {
@@ -162,7 +174,8 @@
         border-left: 0;
         line-height: 100%;
     }
-    .board_page a.bt {
+    .board_page a {
+        margin-bottom: 2%;
         padding: 10px 0 0 0;
         font-size: 1.2rem;
         letter-spacing: -1px;
@@ -180,6 +193,11 @@
         border-left: 1px solid #ddd;
     }
 
+    .search {
+        margin-left: 79.5%;
+    }
+
+
 </style>
 
 <body>
@@ -191,6 +209,16 @@
         </div>
 
         <div class="board_list_wrap">
+            <form class="search" th:action="@{/board/list}" method="get">
+                <input type="text" name="searchKeyword">
+                <button type="submit">검색</button>
+            </form>
+
+            <th:div class="board_page" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a class="num" th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+                <a class="num on" th:if="${page == nowPage}" th:text="${page}"></a>
+            </th:div>
+
             <div class="board_list">
                 <div class="top">
                     <div class="num">글 번호</div>
@@ -206,21 +234,11 @@
                 </div>
             </div>
 
-            <th:div class="board_page" th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                <a class="num" th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
-                <a class="num on" th:if="${page == nowPage}" th:text="${page}"></a>
-            </th:div>
-
             <div class="bt_wrap">
                 <a href="write" class="on">등록</a>
             </div>
 
         </div>
-
-        <form th:action="@{/board/list}" method="get">
-            <input type="text" name="searchKeyword">
-            <button type="submit">검색</button>
-        </form>
     </div>
 
 </body>
