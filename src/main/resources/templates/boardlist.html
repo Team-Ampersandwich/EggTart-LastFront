@@ -223,6 +223,7 @@
                 <div class="top">
                     <div class="num">글 번호</div>
                     <div class="title">제목</div>
+                    <div class="writer">글쓴이</div>
                 </div>
             </div>
             <div class="board_list">
@@ -231,6 +232,7 @@
                     <div class="title">
                         <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
                     </div>
+                    <div class="writer">김이름</div>
                 </div>
             </div>
 
